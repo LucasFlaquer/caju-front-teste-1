@@ -1,5 +1,6 @@
 import { ButtonSmall } from '~/components/Buttons'
 import { useRegistrations } from '~/context/registrations-context'
+import { ConfirmationDialog } from '~/components/ConfirmationDialog'
 
 interface Props {
   id: string
@@ -12,8 +13,8 @@ export function RepproveButton({ id }: Props) {
     updateStatus(id, 'REPROVED')
   }
   return (
-    <ButtonSmall onClick={handleClick} bgcolor="rgb(255, 145, 154)">
-      Reprovar
-    </ButtonSmall>
+    <ConfirmationDialog onConfirm={handleClick} title="Reprovar Candidato">
+      <ButtonSmall $bgcolor="rgb(255, 145, 154)">Reprovar</ButtonSmall>
+    </ConfirmationDialog>
   )
 }

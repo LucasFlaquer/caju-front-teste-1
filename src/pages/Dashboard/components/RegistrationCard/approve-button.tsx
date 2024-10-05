@@ -1,4 +1,5 @@
 import { ButtonSmall } from '~/components/Buttons'
+import { ConfirmationDialog } from '~/components/ConfirmationDialog'
 import { useRegistrations } from '~/context/registrations-context'
 
 interface Props {
@@ -12,8 +13,8 @@ export function AppproveButton({ id }: Props) {
     updateStatus(id, 'APPROVED')
   }
   return (
-    <ButtonSmall onClick={handleClick} bgcolor="rgb(155, 229, 155)">
-      Aprovar
-    </ButtonSmall>
+    <ConfirmationDialog onConfirm={handleClick} title="Aprovar">
+      <ButtonSmall $bgcolor="rgb(155, 229, 155)">Aprovar</ButtonSmall>
+    </ConfirmationDialog>
   )
 }

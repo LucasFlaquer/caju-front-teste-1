@@ -1,4 +1,5 @@
 import { ButtonSmall } from '~/components/Buttons'
+import { ConfirmationDialog } from '~/components/ConfirmationDialog'
 import { useRegistrations } from '~/context/registrations-context'
 
 interface Props {
@@ -12,8 +13,8 @@ export function ReviewButton({ id }: Props) {
     updateStatus(id, 'REVIEW')
   }
   return (
-    <ButtonSmall onClick={handleClick} bgcolor="#ff8858">
-      Revisar novamente
-    </ButtonSmall>
+    <ConfirmationDialog onConfirm={handleClick} title="Revisar">
+      <ButtonSmall $bgcolor="#ff8858">Revisar</ButtonSmall>
+    </ConfirmationDialog>
   )
 }

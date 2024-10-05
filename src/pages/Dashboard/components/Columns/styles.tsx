@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-type StatusKeys = 'REVIEW' | 'APPROVED' | 'REPROVED'
+export type StatusKeys = 'REVIEW' | 'APPROVED' | 'REPROVED'
 
 const registrationStatusStyles: {
   [key in string]: { background: string; title: string }
@@ -27,18 +27,22 @@ export const Container = styled.div`
   margin-top: 24px;
 `
 
-export const Column = styled.div<{ status: StatusKeys }>`
+interface StatusProps {
+  $status: StatusKeys
+}
+
+export const Column = styled.div<StatusProps>`
   height: auto;
-  background-color: ${({ status }) =>
-    registrationStatusStyles[status].background};
+  background-color: ${({ $status }) =>
+    registrationStatusStyles[$status].background};
   border-radius: 32px;
   min-height: 80vh;
   max-height: 80vh;
 `
 
-export const TitleColumn = styled.h3<{ status: StatusKeys }>`
+export const TitleColumn = styled.h3<StatusProps>`
   margin: 0px;
-  color: ${({ status }) => registrationStatusStyles[status].title};
+  color: ${({ $status }) => registrationStatusStyles[$status].title};
   margin: 24px;
 `
 

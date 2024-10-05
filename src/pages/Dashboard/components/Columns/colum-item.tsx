@@ -4,7 +4,7 @@ import { Registration } from '~/interfaces/registrations'
 
 interface Props {
   collumn: {
-    status: string
+    status: S.StatusKeys
     title: string
   }
   registrations: Registration[]
@@ -12,9 +12,9 @@ interface Props {
 
 export function ColumnItem({ collumn, registrations }: Props) {
   return (
-    <S.Column status={collumn.status} key={collumn.title}>
+    <S.Column $status={collumn.status} key={collumn.title}>
       <>
-        <S.TitleColumn status={collumn.status}>{collumn.title}</S.TitleColumn>
+        <S.TitleColumn $status={collumn.status}>{collumn.title}</S.TitleColumn>
         <S.CollumContent>
           {registrations.map((registration) => (
             <RegistrationCard data={registration} key={registration.id} />
