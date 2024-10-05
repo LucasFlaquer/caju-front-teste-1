@@ -6,10 +6,11 @@ import {
   HiOutlineTrash,
 } from 'react-icons/hi'
 import { Registration } from '~/interfaces/registrations'
-import { RepproveButton } from './repprove-button'
-import { AppproveButton } from './approve-button'
-import { ReviewButton } from './review-button'
+import { RepproveButton } from './components/repprove-button'
+import { AppproveButton } from './components/approve-button'
+import { ReviewButton } from './components/review-button'
 import { useRegistrations } from '~/context/registrations-context'
+import { ConfirmationDialog } from '~/components/ConfirmationDialog'
 
 interface Props {
   data: Registration
@@ -44,9 +45,11 @@ const RegistrationCard = ({ data }: Props) => {
         ) : (
           <ReviewButton id={data.id} />
         )}
-        <S.RemoveButton onClick={handleDelete}>
-          <HiOutlineTrash size={16} />
-        </S.RemoveButton>
+        <ConfirmationDialog onConfirm={handleDelete} title="Remover">
+          <S.RemoveButton>
+            <HiOutlineTrash size={16} />
+          </S.RemoveButton>
+        </ConfirmationDialog>
       </S.Actions>
     </S.Card>
   )
