@@ -15,11 +15,12 @@ const Button = styled.button`
   font-size: 16px;
   font-weight: 600;
 `
-
-export const ButtonSmall = styled.button<{
+type ButtonSmallProps = {
   bgcolor?: string
   color?: string
-}>`
+}
+
+export const ButtonSmall = styled.button<ButtonSmallProps>`
   font-size: 12px;
   outline: none;
   border-radius: 4px;
