@@ -18,7 +18,9 @@ export function Collumns(props: Props) {
         <ColumnItem
           key={collumn.status}
           collumn={collumn}
-          registrations={props.registrations}
+          registrations={props.registrations.filter(
+            (registration) => registration.status === collumn.status,
+          )}
         />
       ))}
     </S.Container>
