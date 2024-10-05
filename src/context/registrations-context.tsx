@@ -6,6 +6,7 @@ import {
   useState,
 } from 'react'
 import { api } from '~/api'
+import { useToast } from '~/hooks/useToast'
 import { Registration, RegistrationStatus } from '~/interfaces/registrations'
 
 interface ProviderProps {
@@ -16,14 +17,18 @@ interface RegistrationsContextProps {
   registrations: Registration[]
   updateStatus: (id: string, status: RegistrationStatus) => Promise<void>
   removeRegistration: (id: string) => Promise<void>
+  isLoading: boolean
 }
 
 const RegistrationContext = createContext({} as RegistrationsContextProps)
 
 export function RegistrationContextProvider({ children }: ProviderProps) {
+  const { notifySuccess } = useToast()
+  const [isLoading, setIsLoading] = useState(false)
   const [registrations, setRegistrations] = useState<Registration[]>([])
 
   async function updateStatus(id: string, status: RegistrationStatus) {
+    setIsLoading(true)
     const registrationToUpdate = registrations.find(
       (registration) => registration.id === id,
     )
@@ -37,9 +42,12 @@ export function RegistrationContextProvider({ children }: ProviderProps) {
       return { ...registration, status }
     })
     setRegistrations(registrationsUpdated)
+    setIsLoading(false)
+    notifySuccess('Registro atualizado com sucesso')
   }
 
   async function removeRegistration(id: string) {
+    setIsLoading(true)
     const registrationToUpdate = registrations.find(
       (registration) => registration.id === id,
     )
@@ -49,11 +57,15 @@ export function RegistrationContextProvider({ children }: ProviderProps) {
       (registration) => registration.id !== id,
     )
     setRegistrations(registrationsUpdated)
+    setIsLoading(false)
+    notifySuccess('Registro removido com sucesso')
   }
 
   async function fetchInitialData() {
+    setIsLoading(true)
     const response = await api.get('/registrations')
     setRegistrations(response.data)
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -65,6 +77,7 @@ export function RegistrationContextProvider({ children }: ProviderProps) {
         registrations,
         updateStatus,
         removeRegistration,
+        isLoading,
       }}
     >
       {children}
