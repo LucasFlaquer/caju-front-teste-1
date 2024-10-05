@@ -17,6 +17,7 @@ interface RegistrationsContextProps {
   registrations: Registration[]
   updateStatus: (id: string, status: RegistrationStatus) => Promise<void>
   removeRegistration: (id: string) => Promise<void>
+  refreshList: () => Promise<void>
   isLoading: boolean
 }
 
@@ -61,7 +62,7 @@ export function RegistrationContextProvider({ children }: ProviderProps) {
     notifySuccess('Registro removido com sucesso')
   }
 
-  async function fetchInitialData() {
+  async function fetchRegistrations() {
     setIsLoading(true)
     const response = await api.get('/registrations')
     setRegistrations(response.data)
@@ -69,7 +70,7 @@ export function RegistrationContextProvider({ children }: ProviderProps) {
   }
 
   useEffect(() => {
-    fetchInitialData()
+    fetchRegistrations()
   }, [])
   return (
     <RegistrationContext.Provider
@@ -77,6 +78,7 @@ export function RegistrationContextProvider({ children }: ProviderProps) {
         registrations,
         updateStatus,
         removeRegistration,
+        refreshList: fetchRegistrations,
         isLoading,
       }}
     >
