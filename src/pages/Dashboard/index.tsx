@@ -1,8 +1,8 @@
-import { Collumns } from "./components/Columns";
-import * as S from "./styles";
-import { SearchBar } from "./components/Searchbar";
-import { useEffect, useState } from 'react';
-import { api } from '~/api';
+import { Collumns } from './components/Columns'
+import * as S from './styles'
+import { SearchBar } from './components/Searchbar'
+import { useEffect, useState } from 'react'
+import { api } from '~/api'
 
 const DashboardPage = () => {
   const [registrations, setRegistrations] = useState([])
@@ -20,6 +20,6 @@ const DashboardPage = () => {
       <SearchBar />
       <Collumns registrations={registrations} />
     </S.Container>
-  );
-};
-export default DashboardPage;
+  )
+}
+export default DashboardPage
