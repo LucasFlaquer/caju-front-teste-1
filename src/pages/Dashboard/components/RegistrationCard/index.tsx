@@ -1,4 +1,3 @@
-import { ButtonSmall } from '~/components/Buttons'
 import * as S from './styles'
 import {
   HiOutlineMail,
@@ -7,26 +6,21 @@ import {
   HiOutlineTrash,
 } from 'react-icons/hi'
 import { Registration } from '~/interfaces/registrations'
+import { RepproveButton } from './repprove-button'
+import { AppproveButton } from './approve-button'
+import { ReviewButton } from './review-button'
 import { useRegistrations } from '~/context/registrations-context'
 
-type Props = {
+interface Props {
   data: Registration
 }
 
 const RegistrationCard = ({ data }: Props) => {
-  const { updateStatus } = useRegistrations()
-  function handleRepprove() {
-    updateStatus(data.id, 'REPROVED')
-  }
+  const { removeRegistration } = useRegistrations()
 
-  function handleReview() {
-    updateStatus(data.id, 'REVIEW')
+  function handleDelete() {
+    removeRegistration(data.id)
   }
-
-  function handleApprove() {
-    updateStatus(data.id, 'APPROVED')
-  }
-
   return (
     <S.Card>
       <S.IconAndText>
@@ -44,16 +38,15 @@ const RegistrationCard = ({ data }: Props) => {
       <S.Actions>
         {data.status === 'REVIEW' ? (
           <>
-            <ButtonSmall onClick={handleRepprove} bgcolor="rgb(255, 145, 154)">
-              Reprovar
-            </ButtonSmall>
-            <ButtonSmall  bgcolor="rgb(155, 229, 155)">Aprovar</ButtonSmall>
+            <RepproveButton id={data.id} />
+            <AppproveButton id={data.id} />
           </>
         ) : (
-          <ButtonSmall onClick={handleReview} bgcolor="#ff8858">Revisar novamente</ButtonSmall>
+          <ReviewButton id={data.id} />
         )}
-
-        <HiOutlineTrash />
+        <S.RemoveButton onClick={handleDelete}>
+          <HiOutlineTrash size={16} />
+        </S.RemoveButton>
       </S.Actions>
     </S.Card>
   )

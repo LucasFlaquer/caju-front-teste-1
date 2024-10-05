@@ -1,19 +1,10 @@
 import { Collumns } from './components/Columns'
 import * as S from './styles'
 import { SearchBar } from './components/Searchbar'
-import { useEffect, useState } from 'react'
-import { api } from '~/api'
+import { useRegistrations } from '~/context/registrations-context'
 
 const DashboardPage = () => {
-  const [registrations, setRegistrations] = useState([])
-  async function fetchInitialData() {
-    const response = await api.get('/registrations')
-    setRegistrations(response.data)
-  }
-
-  useEffect(() => {
-    fetchInitialData()
-  }, [])
+  const { registrations } = useRegistrations()
 
   return (
     <S.Container>

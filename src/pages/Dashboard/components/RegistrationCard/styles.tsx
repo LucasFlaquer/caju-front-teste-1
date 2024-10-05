@@ -35,3 +35,10 @@ export const Actions = styled.div`
     cursor: pointer;
   }
 `
+export const RemoveButton = styled.button`
+  outline: none;
+  background: none;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+`

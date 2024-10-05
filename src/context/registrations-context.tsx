@@ -15,6 +15,7 @@ interface ProviderProps {
 interface RegistrationsContextProps {
   registrations: Registration[]
   updateStatus: (id: string, status: RegistrationStatus) => Promise<void>
+  removeRegistration: (id: string) => Promise<void>
 }
 
 const RegistrationContext = createContext({} as RegistrationsContextProps)
@@ -23,14 +24,31 @@ export function RegistrationContextProvider({ children }: ProviderProps) {
   const [registrations, setRegistrations] = useState<Registration[]>([])
 
   async function updateStatus(id: string, status: RegistrationStatus) {
-    const registration = registrations.find(
+    const registrationToUpdate = registrations.find(
       (registration) => registration.id === id,
     )
-    if (!registration) return
-    await api.put(`/registrations/${registration.id}`, {
-      ...registration,
+    if (!registrationToUpdate) return
+    await api.put(`/registrations/${registrationToUpdate.id}`, {
+      ...registrationToUpdate,
       status,
     })
+    const registrationsUpdated = registrations.map((registration) => {
+      if (registration.id !== registrationToUpdate.id) return registration
+      return { ...registration, status }
+    })
+    setRegistrations(registrationsUpdated)
+  }
+
+  async function removeRegistration(id: string) {
+    const registrationToUpdate = registrations.find(
+      (registration) => registration.id === id,
+    )
+    if (!registrationToUpdate) return
+    await api.delete(`/registrations/${registrationToUpdate.id}`)
+    const registrationsUpdated = registrations.filter(
+      (registration) => registration.id !== id,
+    )
+    setRegistrations(registrationsUpdated)
   }
 
   async function fetchInitialData() {
@@ -46,6 +64,7 @@ export function RegistrationContextProvider({ children }: ProviderProps) {
       value={{
         registrations,
         updateStatus,
+        removeRegistration,
       }}
     >
       {children}
