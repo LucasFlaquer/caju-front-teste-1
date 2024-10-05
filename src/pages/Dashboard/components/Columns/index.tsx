@@ -1,6 +1,6 @@
 
 import * as S from "./styles";
-import RegistrationCard from "../RegistrationCard";
+import { ColumnItem } from '~/pages/Dashboard/components/Columns/colum-item';
 
 const allColumns = [
   { status: 'REVIEW', title: "Pronto para revisar" },
@@ -9,33 +9,15 @@ const allColumns = [
 ];
 
 type Props = {
-  registrations?: any[];
+  registrations: any[];
 };
-const Collumns = (props: Props) => {
+export function Collumns(props: Props) {
   return (
     <S.Container>
-      {allColumns.map((collum) => {
-        return (
-          <S.Column status={collum.status} key={collum.title}>
-            <>
-              <S.TitleColumn status={collum.status}>
-                {collum.title}
-              </S.TitleColumn>
-              <S.CollumContent>
-                {props?.registrations?.map((registration) => {
-                  return (
-                    <RegistrationCard
-                      data={registration}
-                      key={registration.id}
-                    />
-                  );
-                })}
-              </S.CollumContent>
-            </>
-          </S.Column>
-        );
-      })}
+      {allColumns.map(collumn => (
+        <ColumnItem key={collumn.status} collumn={collumn} registrations={props.registrations} />
+      ))}      
     </S.Container>
   );
 };
-export default Collumns;
+
