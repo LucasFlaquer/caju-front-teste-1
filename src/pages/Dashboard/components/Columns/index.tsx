@@ -2,7 +2,7 @@ import { Registration } from '~/interfaces/registrations'
 import * as S from './styles'
 import { ColumnItem } from '~/pages/Dashboard/components/Columns/colum-item'
 
-const allColumns = [
+const allColumns: { status: S.StatusKeys; title: string }[] = [
   { status: 'REVIEW', title: 'Pronto para revisar' },
   { status: 'APPROVED', title: 'Aprovado' },
   { status: 'REPROVED', title: 'Reprovado' },
