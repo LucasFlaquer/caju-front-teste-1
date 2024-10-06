@@ -15,10 +15,11 @@ interface ProviderProps {
 
 interface RegistrationsContextProps {
   registrations: Registration[]
+  isLoading: boolean
   updateStatus: (id: string, status: RegistrationStatus) => Promise<void>
   removeRegistration: (id: string) => Promise<void>
   refreshList: () => Promise<void>
-  isLoading: boolean
+  fetchByCPF: (cpf: string) => Promise<void>
 }
 
 const RegistrationContext = createContext({} as RegistrationsContextProps)
@@ -62,6 +63,15 @@ export function RegistrationContextProvider({ children }: ProviderProps) {
     notifySuccess('Registro removido com sucesso')
   }
 
+  async function fetchByCPF(cpf: string) {
+    setIsLoading(true)
+    const response = await api.get(
+      `/registrations?cpf=${cpf.replace(/\D/g, '')}`,
+    )
+    setRegistrations(response.data)
+    setIsLoading(false)
+  }
+
   async function fetchRegistrations() {
     setIsLoading(true)
     const response = await api.get('/registrations')
@@ -79,6 +89,7 @@ export function RegistrationContextProvider({ children }: ProviderProps) {
         updateStatus,
         removeRegistration,
         refreshList: fetchRegistrations,
+        fetchByCPF,
         isLoading,
       }}
     >
