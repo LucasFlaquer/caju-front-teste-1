@@ -25,12 +25,12 @@ type Props = {
   error?: string
 } & InputHTMLAttributes<HTMLInputElement>
 
-const TextField = (props: Props) => {
+const TextField = ({ label, error, ...rest }: Props) => {
   return (
     <div>
-      <label htmlFor={props.id}>{props.label}</label>
-      <Input {...props} />
-      <span style={{ fontSize: 12, color: 'red' }}>{props.error}</span>
+      <label htmlFor={rest.id}>{label}</label>
+      <Input {...rest} />
+      <span style={{ fontSize: 12, color: 'red' }}>{error}</span>
     </div>
   )
 }
