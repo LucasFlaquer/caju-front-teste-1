@@ -36,7 +36,7 @@ export const ButtonSmall = styled.button<ButtonSmallProps>`
   border-radius: 4px;
   border: none;
   padding: 4px 16px;
-  background-color: ${(props) => props.$bgcolor ?? 'none'};
+  background-color: ${(props) => props.$bgcolor ?? 'transparent'};
   color: ${(props) => props.$color ?? '#000'};
   cursor: pointer;
 `

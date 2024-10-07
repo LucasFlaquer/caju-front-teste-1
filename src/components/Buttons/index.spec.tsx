@@ -1,4 +1,4 @@
-import { Button } from '.'
+import { Button, ButtonSmall } from '.'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
@@ -25,5 +25,30 @@ describe('Button component', () => {
 
     expect(buttonElement).toHaveStyle('height: 56px')
     expect(buttonElement).toHaveStyle('padding: 8px 32px')
+  })
+})
+
+describe('ButtonSmall component', () => {
+  it('renders the ButtonSmall with default styles', () => {
+    render(<ButtonSmall>Small Button</ButtonSmall>)
+    const buttonSmallElement = screen.getByText('Small Button')
+
+    expect(buttonSmallElement).toBeInTheDocument()
+    expect(buttonSmallElement).toHaveStyle('font-size: 12px')
+    expect(buttonSmallElement).toHaveStyle('background-color: transparent')
+    expect(buttonSmallElement).toHaveStyle('color: #000')
+  })
+
+  it('renders the ButtonSmall with custom styles', () => {
+    render(
+      <ButtonSmall $bgcolor="#f00" $color="#fff">
+        Custom Small Button
+      </ButtonSmall>,
+    )
+    const buttonSmallElement = screen.getByText('Custom Small Button')
+
+    expect(buttonSmallElement).toBeInTheDocument()
+    expect(buttonSmallElement).toHaveStyle('background-color: #f00')
+    expect(buttonSmallElement).toHaveStyle('color: #fff')
   })
 })
