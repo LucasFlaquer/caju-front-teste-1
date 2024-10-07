@@ -1,5 +1,5 @@
 import { Controller, useForm } from 'react-hook-form'
-import Button from '~/components/Buttons'
+import { Button } from '~/components/Buttons'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormData, schema } from './validationSchema'
 import { TextField } from '~/components/Form/TextField'

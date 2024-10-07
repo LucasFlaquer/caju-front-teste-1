@@ -4,7 +4,7 @@ interface ButtonProps {
   $variant?: 'default' | 'cancel'
 }
 
-const Button = styled.button<ButtonProps>`
+export const Button = styled.button<ButtonProps>`
   outline: none;
   display: flex;
   align-items: center;
@@ -40,5 +40,3 @@ export const ButtonSmall = styled.button<ButtonSmallProps>`
   color: ${(props) => props.$color ?? '#000'};
   cursor: pointer;
 `
-
-export default Button

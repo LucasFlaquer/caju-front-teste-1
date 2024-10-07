@@ -1,7 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { ReactNode } from 'react'
 import { HiOutlineX } from 'react-icons/hi'
-import Button from '~/components/Buttons'
+import { Button } from '~/components/Buttons'
 import {
   CloseButton,
   Content,
