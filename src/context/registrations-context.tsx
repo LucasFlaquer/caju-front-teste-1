@@ -1,6 +1,7 @@
 import {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -63,14 +64,14 @@ export function RegistrationContextProvider({ children }: ProviderProps) {
     notifySuccess('Registro removido com sucesso')
   }
 
-  async function fetchByCPF(cpf: string) {
+  const fetchByCPF = useCallback(async (cpf: string) => {
     setIsLoading(true)
     const response = await api.get(
       `/registrations?cpf=${cpf.replace(/\D/g, '')}`,
     )
     setRegistrations(response.data)
     setIsLoading(false)
-  }
+  }, [])
 
   async function fetchRegistrations() {
     setIsLoading(true)
