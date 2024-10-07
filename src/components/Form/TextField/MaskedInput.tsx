@@ -4,14 +4,16 @@ import { InputWrapper } from '~/components/Form/TextField/styles'
 
 interface Props extends MaskedInputProps {
   error?: string
+  label?: string
 }
 
 function MaskedInputComponent(
-  { mask, error, ...rest }: Props,
+  { mask, error, label, ...rest }: Props,
   ref: ForwardedRef<InputMasked>,
 ) {
   return (
     <InputWrapper>
+      <label htmlFor={rest.id}>{label}</label>
       <InputMasked mask={mask} {...rest} ref={ref} />
       {error && <span>{error}</span>}
     </InputWrapper>
