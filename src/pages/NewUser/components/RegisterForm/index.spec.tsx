@@ -26,7 +26,7 @@ describe('<RegisterForm />', () => {
 
   beforeEach(() => {
     jest.clearAllMocks()
-    spyedApiPost = jest.spyOn(api, 'post')
+    spyedApiPost = jest.spyOn(api, 'post').mockResolvedValue({})
   })
 
   it('should be able to render properly', () => {
