@@ -44,16 +44,18 @@ export function RegisterForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <TextField
         placeholder="Nome"
         label="Nome"
+        id="name"
         {...register('name')}
         error={errors.name?.message}
       />
       <TextField
         placeholder="Email"
         label="Email"
+        id="email"
         type="email"
         {...register('email')}
         error={errors.email?.message}
@@ -66,6 +68,7 @@ export function RegisterForm() {
           <MaskedInput
             mask={CPF_MASK}
             placeholder="CPF"
+            id="cpf"
             label="CPF"
             {...field}
             error={errors.cpf?.message}
@@ -75,6 +78,7 @@ export function RegisterForm() {
       <TextField
         label="Data de admissão"
         type="date"
+        id="admissionDate"
         {...register('admissionDate')}
         error={errors.admissionDate?.message}
       />
