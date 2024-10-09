@@ -12,7 +12,11 @@ interface Props {
 
 export function ColumnItem({ collumn, registrations }: Props) {
   return (
-    <S.Column $status={collumn.status} key={collumn.title}>
+    <S.Column
+      $status={collumn.status}
+      key={collumn.title}
+      data-testid={`collumn-${collumn.status}`}
+    >
       <>
         <S.TitleColumn $status={collumn.status}>{collumn.title}</S.TitleColumn>
         <S.CollumContent>

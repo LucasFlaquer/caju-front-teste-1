@@ -23,7 +23,7 @@ const RegistrationCard = ({ data }: Props) => {
     removeRegistration(data.id)
   }
   return (
-    <S.Card>
+    <S.Card data-testid="registration-card">
       <S.IconAndText>
         <HiOutlineUser />
         <h3>{data.employeeName}</h3>
@@ -46,7 +46,7 @@ const RegistrationCard = ({ data }: Props) => {
           <ReviewButton id={data.id} />
         )}
         <ConfirmationDialog onConfirm={handleDelete} title="Remover">
-          <S.RemoveButton>
+          <S.RemoveButton data-testid="delete-button">
             <HiOutlineTrash size={16} />
           </S.RemoveButton>
         </ConfirmationDialog>
