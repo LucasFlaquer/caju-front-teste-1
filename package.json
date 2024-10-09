@@ -10,7 +10,7 @@
     "test": "jest --verbose --no-cache --coverage",
     "test:dev": "jest --watch --verbose --no-cache",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview --port 3001"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
