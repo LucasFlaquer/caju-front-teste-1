@@ -12,7 +12,7 @@ export function SearchByTherm() {
 
   useEffect(() => {
     if (!isValidCPF(debouncedSearchTerm)) return
-    fetchByCPF(debouncedSearchTerm)
+    fetchByCPF(debouncedSearchTerm).then(() => setSearchTerm(''))
   }, [debouncedSearchTerm, fetchByCPF])
 
   return (
@@ -20,6 +20,7 @@ export function SearchByTherm() {
       mask={CPF_MASK}
       placeholder="Digite um CPF válido"
       value={searchTerm}
+      id="cpf"
       onChange={(e) => setSearchTerm(e.target.value)}
     />
   )
