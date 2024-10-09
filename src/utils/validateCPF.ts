@@ -1,3 +1,4 @@
+const CPF_VALID_LENGTH = 11
 const FACTOR_DIGIT_1 = 10
 const FACTOR_DIGIT_2 = 11
 const MAX_DIGITS_1 = 9
@@ -18,7 +19,7 @@ function getOnlyNumbers(cpf: string) {
   return cpf.replace(/\D/g, '')
 }
 function isLengthInvalid(str: string) {
-  return str.length !== 11
+  return str.length !== CPF_VALID_LENGTH
 }
 function isAllEqual(cpf: string) {
   return cpf.split('').every((c) => c === cpf[0])
