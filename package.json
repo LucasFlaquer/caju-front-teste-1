@@ -9,6 +9,7 @@
     "build": "tsc && vite build",
     "test": "jest --verbose --no-cache --coverage",
     "test:dev": "jest --watch --verbose --no-cache",
+    "test:e2e": "cypress run",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview --port 3001"
   },
