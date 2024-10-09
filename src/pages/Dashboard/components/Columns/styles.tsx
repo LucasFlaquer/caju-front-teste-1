@@ -25,6 +25,10 @@ export const Container = styled.div`
   grid-gap: 24px;
   justify-content: center;
   margin-top: 24px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 interface StatusProps {
@@ -38,6 +42,11 @@ export const Column = styled.div<StatusProps>`
   border-radius: 32px;
   min-height: 80vh;
   max-height: 80vh;
+
+  @media (max-width: 768px) {
+    min-height: 60vh;
+    max-height: 60vh;
+  }
 `
 
 export const TitleColumn = styled.h3<StatusProps>`
